@@ -16,6 +16,7 @@ library BalanceDeltaLibrary {
         returns (int128 _amount0)
     {
         assembly ("memory-safe") {
+            // arithmetic shift right by 128 bits.
             _amount0 := sar(128, balanceDelta)
         }
     }
@@ -26,6 +27,7 @@ library BalanceDeltaLibrary {
         returns (int128 _amount1)
     {
         assembly ("memory-safe") {
+            // Interpret the lower 16 bytes (128 bits = 16 bytes) as a signed integer, and extend its sign bit to fill 256 bits.
             _amount1 := signextend(15, balanceDelta)
         }
     }
