@@ -29,6 +29,10 @@ contract Reader {
         view
         returns (int256 delta)
     {
-        // Write your code here
+        // Get the slot where the data you want to read is stored
+        bytes32 slot = computeSlot(target, currency);
+
+        // Now use that slot to load the content of that transient variable.
+        return int256(uint256(poolManager.exttload(slot)));
     }
 }
